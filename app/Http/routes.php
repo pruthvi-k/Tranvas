@@ -14,3 +14,8 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('user/login', 'UserController@getUserLogin');
+Route::post('user/do-login', 'UserController@postDoLogin');
+Route::get('user/dashboard', 'UserController@getDashboard');
+Route::get('user/logout', 'UserController@doLogout');
