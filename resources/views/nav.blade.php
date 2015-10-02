@@ -16,7 +16,7 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-                <li><a href="#">Link</a></li>
+                <li><a href="{{url('admin/user/manage/#/user')}}">User</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">Dropdown <span class="caret"></span></a>
@@ -41,10 +41,12 @@
                         <li><a href="#">Another action</a></li>
                         <li><a href="#">Something else here</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="{{url('user/logout')}}">
-                                <i class="fa fa-sign-out"></i>
+                        <li>
+                            <a href="{{url('user/logout')}}">
+                                <i class="fa fa-fw fa-power-off"></i>
                                 Logout
-                            </a></li>
+                            </a>
+                        </li>
                     </ul>
                 </li>
             </ul>

@@ -5994,4 +5994,13 @@ button.close {
 * {
   font-family: 'Open Sans', sans-serif; }
 
+.inline-icons {
+  margin-right: 20px; }
+  .inline-icons:last-child {
+    margin-right: 0px; }
+  .inline-icons:last-child.end-pad {
+    margin-right: 20px; }
+  .inline-icons:last-child.end-pad-10 {
+    margin-right: 10px; }
+
 /*# sourceMappingURL=app.css.map */

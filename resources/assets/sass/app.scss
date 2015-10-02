@@ -3,3 +3,16 @@
 * {
   font-family: 'Open Sans', sans-serif;
 }
+
+.inline-icons {
+  margin-right: 20px;
+  &:last-child {
+    margin-right: 0px;
+  }
+  &:last-child.end-pad {
+    margin-right: 20px;
+  }
+  &:last-child.end-pad-10 {
+    margin-right: 10px;
+  }
+}

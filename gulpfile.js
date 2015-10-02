@@ -16,5 +16,12 @@ elixir(function (mix) {
 
     mix.scripts(['app.js']);
 
-    mix.version('js/all.js');
+    mix.copy('resources/assets/js/user/templates', 'public/ng_templates/users');
+
+    mix.scripts([
+        'user/userApp.js',
+        'user/userManagerController.js'
+    ], 'public/js/userModule.js');
+
+    mix.version(['js/all.js', 'js/userModule.js']);
 });

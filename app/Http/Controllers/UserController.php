@@ -26,9 +26,20 @@ class UserController extends Controller
      */
     public function getUserLogin()
     {
+        // if user is logged in already, he should not see the login screen
+        if (Auth::user()) {
+            return redirect('user/dashboard');
+        }
+
         return view('user.login');
     }
 
+    /**
+     * Checking the credentials and logging the user
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function postDoLogin(Request $request)
     {
         // setting us the required information
@@ -43,13 +54,18 @@ class UserController extends Controller
             // will redirect user to the login page with
             // message that the credentials were wrong
             Session::flash('flash_error', 'Something went wrong with the username and / or password');
-            return redirect('user');
+            return redirect('user/login');
         }
 
         Session::flash('flash_message', 'Login successful');
         return redirect('user/dashboard');
     }
 
+    /**
+     * Give user his dashboard
+     *
+     * @return \Illuminate\View\View
+     */
     public function getDashboard()
     {
         return view('user.dashboard');

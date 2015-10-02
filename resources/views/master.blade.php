@@ -19,9 +19,14 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script>
+        var baseUrl = "{{url('/')}}/";
+    </script>
 </head>
 <body>
-
+@if(Auth::user())
+    @include('nav')
+@endif
 <div class="container">
     @if(Session::has('flash_message'))
         <div class="alert alert-success">{{Session::get('flash_message')}}</div>
@@ -33,10 +38,6 @@
         <div class="alert alert-warning">{{Session::get('flash_warning')}}</div>
     @endif
 
-    @if(Auth::user())
-        @include('nav')
-    @endif
-
     @yield('content')
 </div>
 
@@ -44,5 +45,10 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="{{url('js/vendor/angular.min.js')}}"></script>
+<script src="{{url('js/vendor/angular-route.min.js')}}"></script>
+<script src="{{url('js/vendor/angular-cookies.min.js')}}"></script>
+<script src="{{url(elixir('js/all.js'))}}"></script>
+@yield('scripts')
 </body>
 </html>

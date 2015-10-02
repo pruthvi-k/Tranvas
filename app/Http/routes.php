@@ -19,3 +19,10 @@ Route::get('user/login', 'UserController@getUserLogin');
 Route::post('user/do-login', 'UserController@postDoLogin');
 Route::get('user/dashboard', 'UserController@getDashboard');
 Route::get('user/logout', 'UserController@doLogout');
+
+Route::get('admin/user/manage', 'UserManagerController@getUserManagePage');
+
+/*Ajax Routes*/
+Route::group(['prefix' => 'api'], function () {
+    Route::get('user/list', 'UserManagerController@getUserList');
+});
