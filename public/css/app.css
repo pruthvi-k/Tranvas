@@ -6003,4 +6003,12 @@ button.close {
   .inline-icons:last-child.end-pad-10 {
     margin-right: 10px; }
 
+ul.angular-error {
+  padding: 0;
+  margin: 0; }
+  ul.angular-error li {
+    padding: 0;
+    margin: 0;
+    list-style: none; }
+
 /*# sourceMappingURL=app.css.map */

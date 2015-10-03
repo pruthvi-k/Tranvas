@@ -20,6 +20,7 @@ elixir(function (mix) {
 
     mix.scripts([
         'user/userApp.js',
+        'user/userFact.js',
         'user/userManagerController.js'
     ], 'public/js/userModule.js');
 

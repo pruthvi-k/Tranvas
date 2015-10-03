@@ -6,16 +6,20 @@
         <table class="table table-bordered table-striped table-hover">
             <thead>
             <tr>
+                <th>Id</th>
                 <th>Name</th>
                 <th>Email</th>
+                <th>Status</th>
                 <th align="right">Operations</th>
             </tr>
             </thead>
 
             <tbody>
-            <tr ng-repeat="user in userList">
+            <tr ng-repeat="user in userList | orderBy:id:true">
+                <td>#{{user.id}}</td>
                 <td>{{user.name}}</td>
                 <td>{{user.email}}</td>
+                <td>{{user.status}}</td>
                 <td align="right">
                     <a href="#/user/add" class="inline-icons"><i class="fa fa-pencil"></i></a>
                     <a href="#/user/add" class="inline-icons end-pad"><i class="fa fa-trash-o"></i></a>

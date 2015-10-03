@@ -25,4 +25,6 @@ Route::get('admin/user/manage', 'UserManagerController@getUserManagePage');
 /*Ajax Routes*/
 Route::group(['prefix' => 'api'], function () {
     Route::get('user/list', 'UserManagerController@getUserList');
+    Route::post('user/save', 'UserManagerController@postSaveUser');
+    Route::post('user/delete', 'UserManagerController@postDeleteUser');
 });

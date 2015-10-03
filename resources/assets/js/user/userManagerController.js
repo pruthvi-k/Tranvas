@@ -1,45 +1,53 @@
 /**
  * Created by amitav on 10/2/15.
  */
-myApp.controller('userController', ['$scope', 'userFact', function ($scope, userFact) {
-    userFact.getUserList().then(function (response) {
-        $scope.userList = response.data;
-    });
+myApp.controller('userController', ['$scope', '$location', 'userFact',
+    function ($scope, $location, userFact) {
 
-    /*Variables*/
-    angular.extend($scope, {});
-
-    /*Methods*/
-    angular.extend($scope, {});
-}]);
-
-myApp.factory('userFact', ['httpFact', '$http', function (httpFact, $http) {
-    var user = {};
-
-    user.allUser = '';
-
-    user.getUserList = function () {
-        return this.allUser === '' ? this.fetchUserList() : this.allUser;
-    };
-
-    user.fetchUserList = function () {
-        this.allUser = $http.get(baseUrl + 'api/user/list').then(function (data) {
-            return data;
+        /*Setting the users after getting data from factory*/
+        userFact.getUserList().then(function (response) {
+            $scope.userList = response.data;
         });
-        return this.allUser;
-    };
 
-    return user;
-}]);
-
-myApp.factory('httpFact', ['$http', function ($http) {
-    var httpFact = {};
-
-    httpFact.getRequest = function (url) {
-        return $http.get(url).then(function (data) {
-            return data;
+        /*Update the user list of factory broadcast*/
+        $scope.$on('newUserAdded', function (event, data) {
+            $scope.userList.push(data);
         });
-    };
 
-    return httpFact;
-}]);
+        /*Variables*/
+        angular.extend($scope, {
+            newUser: {
+                name: 'Amitav',
+                email: 'reachme@amitavroy.com',
+                password: 'password',
+                cPassword: 'password'
+            },
+            errorMessages: []
+        });
+
+        /*Methods*/
+        angular.extend($scope, {
+
+            /*Save the new user after validations*/
+            saveNewUser: function (userAddForm) {
+                if ($scope.newUser.password != $scope.newUser.cPassword) {
+                    $scope.errorMessages.push('The two passwords do not match');
+                    return false;
+                }
+
+                $scope.errorMessages = [];
+
+                userFact.saveNewUser($scope.newUser).then(function (response) {
+                    $location.path('/user');
+                }).catch(function (data, status, header) {
+                    console.log(data, status);
+                    if (status == 403) {
+                        //alert('validation failed');
+                        angular.forEach(data, function (value, key) {
+                            $scope.errorMessages.push(value.toString());
+                        });
+                    }
+                });
+            }
+        });
+    }]);
