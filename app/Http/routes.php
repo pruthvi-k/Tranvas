@@ -26,5 +26,6 @@ Route::get('admin/user/manage', 'UserManagerController@getUserManagePage');
 Route::group(['prefix' => 'api'], function () {
     Route::get('user/list', 'UserManagerController@getUserList');
     Route::post('user/save', 'UserManagerController@postSaveUser');
+    Route::post('user/update', 'UserManagerController@postUpdateUser');
     Route::post('user/delete', 'UserManagerController@postDeleteUser');
 });

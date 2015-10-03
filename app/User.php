@@ -37,6 +37,12 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $hidden = ['password', 'remember_token'];
 
+    /**
+     * Setting the modifier for the status field
+     *
+     * @param $value
+     * @return string
+     */
     public function getStatusAttribute($value)
     {
         if ($value == 1) {
@@ -44,5 +50,10 @@ class User extends Model implements AuthenticatableContract,
         } else {
             return 'Inactive';
         }
+    }
+
+    public function setStatusAttribute($value)
+    {
+        $this->attributes['status'] = ($value == 'Active') ? 1 : 0;
     }
 }

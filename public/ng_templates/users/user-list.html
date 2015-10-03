@@ -1,31 +1,19 @@
+<div class="row" ng-show="errorMessages.length">
+    <div class="col-sm-12">
+        <div class="alert alert-warning" role="alert">
+            <ul class="angular-error">
+                <li ng-repeat="e in errorMessages"><i class="fa fa-exclamation inline-icons end-pad-10"></i>{{e}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
 <div class="row">
     <div class="col-sm-12">
         <a href="#/user/add" class="btn btn-primary"><i class="fa fa-plus inline-icons end-pad-10"></i>Add User</a>
         <br>
         <br>
-        <table class="table table-bordered table-striped table-hover">
-            <thead>
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Status</th>
-                <th align="right">Operations</th>
-            </tr>
-            </thead>
 
-            <tbody>
-            <tr ng-repeat="user in userList | orderBy:id:true">
-                <td>#{{user.id}}</td>
-                <td>{{user.name}}</td>
-                <td>{{user.email}}</td>
-                <td>{{user.status}}</td>
-                <td align="right">
-                    <a href="#/user/add" class="inline-icons"><i class="fa fa-pencil"></i></a>
-                    <a href="#/user/add" class="inline-icons end-pad"><i class="fa fa-trash-o"></i></a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div ui-grid="userNgGrid" ui-grid-pagination ui-grid-edit ui-grid-row-edit ui-grid-cellNav
+             class="dataGrid"></div>
     </div>
 </div>

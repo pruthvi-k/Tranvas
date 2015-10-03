@@ -87,22 +87,40 @@ myApp.factory('userFact', ['$rootScope', 'httpFact', function ($rootScope, httpF
         });
     };
 
+    /**
+     * Update the user from the ui grid request change
+     *
+     * @param userData
+     * @returns {*}
+     */
+    user.updateUser = function (userData) {
+        var updateUrl = baseUrl + 'api/user/update';
+
+        var headers = {
+            'Content-type': 'application/json'
+        };
+
+        return httpFact.postRequest(userData, updateUrl, headers).then(function (response) {
+            return response;
+        });
+    };
+
     return user;
 }]);
 /**
  * Created by amitav on 10/2/15.
  */
-myApp.controller('userController', ['$scope', '$location', 'userFact',
-    function ($scope, $location, userFact) {
+myApp.controller('userController', ['$scope', '$location', '$q', 'userFact',
+    function ($scope, $location, $q, userFact) {
 
         /*Setting the users after getting data from factory*/
         userFact.getUserList().then(function (response) {
-            $scope.userList = response.data;
+            $scope.userNgGrid.data = response.data;
         });
 
         /*Update the user list of factory broadcast*/
         $scope.$on('newUserAdded', function (event, data) {
-            $scope.userList.push(data);
+            $scope.userNgGrid.data.push(data);
         });
 
         /*Variables*/
@@ -113,7 +131,32 @@ myApp.controller('userController', ['$scope', '$location', 'userFact',
                 password: 'password',
                 cPassword: 'password'
             },
-            errorMessages: []
+            errorMessages: [],
+            userNgGrid: {
+                paginationPageSizes: [10, 20, 30],
+                paginationPageSize: 10,
+                enableFiltering: true,
+                columnDefs: [
+                    {field: 'id', maxWidth: '90', enableCellEdit: false},
+                    {field: 'name', displayName: 'Display name'},
+                    {field: 'email', enableSorting: false, enableCellEdit: false},
+                    {
+                        field: 'status', maxWidth: '120',
+                        editableCellTemplate: 'ui-grid/dropdownEditor',
+                        editDropdownOptionsArray: [
+                            {name: 'Active', value: 'Active'},
+                            {name: 'Inactive', value: 'Inactive'}
+                        ],
+                        editDropdownIdLabel: 'value',
+                        editDropdownValueLabel: 'name',
+                    }
+                ],
+                saveRow: $scope.saveRow,
+                onRegisterApi: function (gridApi) {
+                    $scope.gridApi = gridApi;
+                    gridApi.rowEdit.on.saveRow($scope, $scope.saveRow);
+                }
+            }
         });
 
         /*Methods*/
@@ -139,6 +182,12 @@ myApp.controller('userController', ['$scope', '$location', 'userFact',
                         });
                     }
                 });
+            },
+            /*Updating the user row*/
+            saveRow: function (rowEntity) {
+                var promise = userFact.updateUser(rowEntity);
+                $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise);
+                return promise;
             }
         });
     }]);

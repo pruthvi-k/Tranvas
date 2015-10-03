@@ -78,4 +78,16 @@ class UserManagerController extends Controller
             return response('User deleted', 201);
         }
     }
+
+    public function postUpdateUser(Request $request)
+    {
+        $id = $request->input('id');
+
+        $user = User::findOrFail($id);
+        $user->name = $request->input('name');
+        $user->status = $request->input('status');
+        $user->save();
+
+        return response($user, 201);
+    }
 }

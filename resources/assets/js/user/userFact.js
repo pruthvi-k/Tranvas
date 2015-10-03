@@ -69,5 +69,23 @@ myApp.factory('userFact', ['$rootScope', 'httpFact', function ($rootScope, httpF
         });
     };
 
+    /**
+     * Update the user from the ui grid request change
+     *
+     * @param userData
+     * @returns {*}
+     */
+    user.updateUser = function (userData) {
+        var updateUrl = baseUrl + 'api/user/update';
+
+        var headers = {
+            'Content-type': 'application/json'
+        };
+
+        return httpFact.postRequest(userData, updateUrl, headers).then(function (response) {
+            return response;
+        });
+    };
+
     return user;
 }]);
