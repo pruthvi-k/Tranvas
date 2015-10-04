@@ -3,29 +3,11 @@
   "sources": [
     "app.js"
   ],
-  "names": [
-    "myApp",
-    "angular",
-    "module",
-    "factory",
-    "$http",
-    "httpFact",
-    "getRequest",
-    "url",
-    "get",
-    "then",
-    "data",
-    "console",
-    "log",
-    "postRequest",
-    "headers",
-    "method",
-    "response"
-  ],
-  "mappings": "AAGA,GAAAA,OAAAC,QAAAC,OAAA,SAAA,UAAA,UAAA,qBAAA,eAAA,kBAAA,mBAEAF,OAAAG,QAAA,YAAA,QAAA,SAAAC,GACA,GAAAC,KAqBA,OAnBAA,GAAAC,WAAA,SAAAC,GACA,MAAAH,GAAAI,IAAAD,GAAAE,KAAA,SAAAC,GAEA,MADAC,SAAAC,IAAA,kBAAAF,GACAA,KAIAL,EAAAQ,YAAA,SAAAH,EAAAH,EAAAO,GACA,MAAAV,IACAU,QAAAA,EACAC,OAAA,OACAR,IAAAA,EACAG,KAAAA,IACAD,KAAA,SAAAO,GAEA,MADAL,SAAAC,IAAA,kBAAAI,GACAA,KAIAX",
+  "names": [],
+  "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA",
   "file": "all.js",
   "sourcesContent": [
-    "/**\n * Created by amitav on 9/30/15.\n */\nvar myApp = angular.module('myApp', ['ngRoute', 'ui.grid', 'ui.grid.pagination', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav']);\n\nmyApp.factory('httpFact', ['$http', function ($http) {\n    var httpFact = {};\n\n    httpFact.getRequest = function (url) {\n        return $http.get(url).then(function (data) {\n            console.log('Server response', data);\n            return data;\n        });\n    };\n\n    httpFact.postRequest = function (data, url, headers) {\n        return $http({\n            headers: headers,\n            method: \"POST\",\n            url: url,\n            data: data\n        }).then(function (response) {\n            console.log('Server response', response);\n            return response;\n        });\n    };\n\n    return httpFact;\n}]);"
+    "/**\n * Created by amitav on 9/30/15.\n */\nvar myApp = angular.module('myApp', [\n    'ngRoute',\n    'ui.grid',\n    'ui.grid.pagination',\n    'ui.grid.edit',\n    'ui.grid.rowEdit',\n    'ui.grid.cellNav',\n    'angularModalService'\n]);\n\nmyApp.factory('httpFact', ['$http', function ($http) {\n    var httpFact = {};\n\n    httpFact.getRequest = function (url) {\n        return $http.get(url).then(function (data) {\n            console.log('Server response', data);\n            return data;\n        });\n    };\n\n    httpFact.postRequest = function (data, url, headers) {\n        return $http({\n            headers: headers,\n            method: \"POST\",\n            url: url,\n            data: data\n        }).then(function (response) {\n            console.log('Server response', response);\n            return response;\n        });\n    };\n\n    return httpFact;\n}]);"
   ],
   "sourceRoot": "/source/"
 }

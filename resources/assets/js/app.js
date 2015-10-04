@@ -1,7 +1,15 @@
 /**
  * Created by amitav on 9/30/15.
  */
-var myApp = angular.module('myApp', ['ngRoute', 'ui.grid', 'ui.grid.pagination', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav']);
+var myApp = angular.module('myApp', [
+    'ngRoute',
+    'ui.grid',
+    'ui.grid.pagination',
+    'ui.grid.edit',
+    'ui.grid.rowEdit',
+    'ui.grid.cellNav',
+    'angularModalService'
+]);
 
 myApp.factory('httpFact', ['$http', function ($http) {
     var httpFact = {};

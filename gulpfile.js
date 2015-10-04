@@ -17,6 +17,9 @@ elixir(function (mix) {
     mix.scripts(['app.js']);
 
     mix.copy('resources/assets/js/user/templates', 'public/ng_templates/users');
+    mix.copy('resources/assets/js/utils/templates', 'public/ng_templates/utils');
+
+    mix.scripts(['utils/modalModule.js'], 'public/js/utils.js');
 
     mix.scripts([
         'user/userApp.js',
@@ -24,5 +27,5 @@ elixir(function (mix) {
         'user/userManagerController.js'
     ], 'public/js/userModule.js');
 
-    mix.version(['js/all.js', 'js/userModule.js']);
+    mix.version(['js/all.js', 'js/userModule.js', 'js/utils.js']);
 });

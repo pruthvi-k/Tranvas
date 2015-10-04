@@ -1,8 +1,8 @@
 /**
  * Created by amitav on 10/2/15.
  */
-myApp.controller('userController', ['$scope', '$location', '$q', 'userFact',
-    function ($scope, $location, $q, userFact) {
+myApp.controller('userController', ['$scope', '$location', '$q', 'userFact', 'modalFact',
+    function ($scope, $location, $q, userFact, modalFact) {
 
         /*Setting the users after getting data from factory*/
         userFact.getUserList().then(function (response) {
@@ -21,6 +21,10 @@ myApp.controller('userController', ['$scope', '$location', '$q', 'userFact',
                 email: 'reachme@amitavroy.com',
                 password: 'password',
                 cPassword: 'password'
+            },
+            modal: {
+                title: 'Action Success',
+                body: 'This action is successful'
             },
             errorMessages: [],
             userNgGrid: {
@@ -58,16 +62,13 @@ myApp.controller('userController', ['$scope', '$location', '$q', 'userFact',
 
         /*Methods*/
         angular.extend($scope, {
-
             /*Save the new user after validations*/
             saveNewUser: function (userAddForm) {
                 if ($scope.newUser.password != $scope.newUser.cPassword) {
                     $scope.errorMessages.push('The two passwords do not match');
                     return false;
                 }
-
                 $scope.errorMessages = [];
-
                 userFact.saveNewUser($scope.newUser).then(function (response) {
                     $location.path('/user');
                 }).catch(function (data, status, header) {
@@ -84,13 +85,14 @@ myApp.controller('userController', ['$scope', '$location', '$q', 'userFact',
             saveRow: function (rowEntity) {
                 var promise = userFact.updateUser(rowEntity);
                 $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise);
+                modalFact.confirmModal("userController");
                 return promise;
             },
             /*Delete the user row*/
             deleteRow: function (row) {
                 var data = {id: row.entity.id};
                 userFact.deleteUser(data).then(function (response) {
-                    alert('User deleted');
+                    modalFact.confirmModal("userController");
                     var index = $scope.userNgGrid.data.indexOf(row.entity);
                     $scope.userNgGrid.data.splice(index, 1);
                 }).catch(function (data, status, header) {
@@ -100,6 +102,9 @@ myApp.controller('userController', ['$scope', '$location', '$q', 'userFact',
                         });
                     }
                 });
+            },
+            temp: function () {
+                modalFact.confirmModal("userController");
             }
         });
     }]);

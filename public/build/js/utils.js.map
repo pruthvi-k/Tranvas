@@ -1,0 +1,13 @@
+{
+  "version": 3,
+  "sources": [
+    "modalModule.js"
+  ],
+  "names": [],
+  "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA",
+  "file": "utils.js",
+  "sourcesContent": [
+    "/**\n * Created by amitav on 10/4/15.\n */\nmyApp.factory('modalFact', ['ModalService', function (ModalService) {\n    var modal = {};\n\n    modal.confirmModal = function (controllerName) {\n        return ModalService.showModal({\n            templateUrl: baseUrl + 'ng_templates/utils/confirmModal.html',\n            controller: controllerName\n        }).then(function (modal) {\n            modal.element.modal();\n            modal.close.then(function (result) {\n                console.log(result);\n            });\n        });\n    };\n\n    return modal;\n}]);\n\nmyApp.controller('ModalController', function ($scope, close) {\n    $scope.close = function (result) {\n        close(result, 500);\n    }\n});"
+  ],
+  "sourceRoot": "/source/"
+}

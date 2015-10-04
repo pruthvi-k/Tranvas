@@ -50,7 +50,9 @@
 <script src="{{url('js/vendor/angular-route.min.js')}}"></script>
 <script src="{{url('js/vendor/angular-cookies.min.js')}}"></script>
 <script src="{{url('js/vendor/ui-grid.min.js')}}"></script>
+<script src="{{url('js/vendor/angular-modal-service.min.js')}}"></script>
 <script src="{{url(elixir('js/all.js'))}}"></script>
+<script src="{{url(elixir('js/utils.js'))}}"></script>
 @yield('scripts')
 </body>
 </html>
