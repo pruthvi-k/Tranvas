@@ -40,6 +40,12 @@ myApp.controller('userController', ['$scope', '$location', '$q', 'userFact',
                         ],
                         editDropdownIdLabel: 'value',
                         editDropdownValueLabel: 'name',
+                    },
+                    {
+                        name: 'Ops',
+                        sort: false,
+                        maxWidth: 100,
+                        cellTemplate: '<p style="text-align: center"><i class="fa fa-ban" ng-click="grid.appScope.deleteRow(row)"></i></p>'
                     }
                 ],
                 saveRow: $scope.saveRow,
@@ -79,6 +85,21 @@ myApp.controller('userController', ['$scope', '$location', '$q', 'userFact',
                 var promise = userFact.updateUser(rowEntity);
                 $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise);
                 return promise;
+            },
+            /*Delete the user row*/
+            deleteRow: function (row) {
+                var data = {id: row.entity.id};
+                userFact.deleteUser(data).then(function (response) {
+                    alert('User deleted');
+                    var index = $scope.userNgGrid.data.indexOf(row.entity);
+                    $scope.userNgGrid.data.splice(index, 1);
+                }).catch(function (data, status, header) {
+                    if (status == 403) {
+                        angular.forEach(data, function (value, key) {
+                            $scope.errorMessages.push(value.toString());
+                        });
+                    }
+                });
             }
         });
     }]);

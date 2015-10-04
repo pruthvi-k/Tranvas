@@ -79,6 +79,12 @@ class UserManagerController extends Controller
         }
     }
 
+    /**
+     * Updating the user object from the grid call
+     *
+     * @param Request $request
+     * @return \Illuminate\Contracts\Routing\ResponseFactory|\Symfony\Component\HttpFoundation\Response
+     */
     public function postUpdateUser(Request $request)
     {
         $id = $request->input('id');
