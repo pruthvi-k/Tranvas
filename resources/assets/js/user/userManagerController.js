@@ -102,9 +102,6 @@ myApp.controller('userController', ['$scope', '$location', '$q', 'userFact', 'mo
                         });
                     }
                 });
-            },
-            temp: function () {
-                modalFact.confirmModal("userController");
             }
         });
     }]);
