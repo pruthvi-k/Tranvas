@@ -3,26 +3,8 @@
   "sources": [
     "modalModule.js"
   ],
-  "names": [
-    "myApp",
-    "factory",
-    "ModalService",
-    "modal",
-    "confirmModal",
-    "controllerName",
-    "showModal",
-    "templateUrl",
-    "baseUrl",
-    "controller",
-    "then",
-    "element",
-    "close",
-    "result",
-    "console",
-    "log",
-    "$scope"
-  ],
-  "mappings": "AAGAA,MAAAC,QAAA,aAAA,eAAA,SAAAC,GACA,GAAAC,KAcA,OAZAA,GAAAC,aAAA,SAAAC,GACA,MAAAH,GAAAI,WACAC,YAAAC,QAAA,uCACAC,WAAAJ,IACAK,KAAA,SAAAP,GACAA,EAAAQ,QAAAR,QACAA,EAAAS,MAAAF,KAAA,SAAAG,GACAC,QAAAC,IAAAF,QAKAV,KAGAH,MAAAS,WAAA,kBAAA,SAAAO,EAAAJ,GACAI,EAAAJ,MAAA,SAAAC,GACAD,EAAAC,EAAA",
+  "names": [],
+  "mappings": "AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA",
   "file": "utils.js",
   "sourcesContent": [
     "/**\n * Created by amitav on 10/4/15.\n */\nmyApp.factory('modalFact', ['ModalService', function (ModalService) {\n    var modal = {};\n\n    modal.confirmModal = function (controllerName) {\n        return ModalService.showModal({\n            templateUrl: baseUrl + 'ng_templates/utils/confirmModal.html',\n            controller: controllerName\n        }).then(function (modal) {\n            modal.element.modal();\n            modal.close.then(function (result) {\n                console.log(result);\n            });\n        });\n    };\n\n    return modal;\n}]);\n\nmyApp.controller('ModalController', function ($scope, close) {\n    $scope.close = function (result) {\n        close(result, 500);\n    }\n});"

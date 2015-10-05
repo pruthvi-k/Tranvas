@@ -8,7 +8,9 @@ var myApp = angular.module('myApp', [
     'ui.grid.edit',
     'ui.grid.rowEdit',
     'ui.grid.cellNav',
-    'angularModalService'
+    'angularModalService',
+    'angular.snackbar',
+    'angular-loading-bar'
 ]);
 
 myApp.factory('httpFact', ['$http', function ($http) {

@@ -9,8 +9,11 @@
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <!--<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
     <link rel="stylesheet" href="{{url('css/ui-grid.min.css')}}">
+    <link rel="stylesheet" href="{{url('css/angular.snackbar.css')}}">
+    <link rel="stylesheet" href="{{url('css/loading-bar.min.css')}}">
+    <link rel="stylesheet" href="{{url('css/all.css')}}">
     <link rel="stylesheet" href="{{url('css/app.css')}}">
 
 
@@ -50,7 +53,9 @@
 <script src="{{url('js/vendor/angular-route.min.js')}}"></script>
 <script src="{{url('js/vendor/angular-cookies.min.js')}}"></script>
 <script src="{{url('js/vendor/ui-grid.min.js')}}"></script>
+<script src="{{url('js/vendor/angular.snackbar.min.js')}}"></script>
 <script src="{{url('js/vendor/angular-modal-service.min.js')}}"></script>
+<script src="{{url('js/vendor/loading-bar.min.js')}}"></script>
 <script src="{{url(elixir('js/all.js'))}}"></script>
 <script src="{{url(elixir('js/utils.js'))}}"></script>
 @yield('scripts')

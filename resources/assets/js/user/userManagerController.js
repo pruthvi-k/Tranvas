@@ -1,8 +1,11 @@
 /**
  * Created by amitav on 10/2/15.
  */
-myApp.controller('userController', ['$scope', '$location', '$q', 'userFact', 'modalFact',
-    function ($scope, $location, $q, userFact, modalFact) {
+myApp.controller('userController', ['$scope', '$location', '$q', 'userFact', 'modalFact', 'snackbar',
+    function ($scope, $location, $q, userFact, modalFact, snackbar) {
+
+        /*Change the title of the window*/
+        //document.title = 'User management';
 
         /*Setting the users after getting data from factory*/
         userFact.getUserList().then(function (response) {
@@ -16,12 +19,7 @@ myApp.controller('userController', ['$scope', '$location', '$q', 'userFact', 'mo
 
         /*Variables*/
         angular.extend($scope, {
-            newUser: {
-                name: 'Amitav',
-                email: 'reachme@amitavroy.com',
-                password: 'password',
-                cPassword: 'password'
-            },
+            newUser: {},
             modal: {
                 title: 'Action Success',
                 body: 'This action is successful'
@@ -49,7 +47,10 @@ myApp.controller('userController', ['$scope', '$location', '$q', 'userFact', 'mo
                         name: 'Ops',
                         sort: false,
                         maxWidth: 100,
-                        cellTemplate: '<p style="text-align: center"><i class="fa fa-ban" ng-click="grid.appScope.deleteRow(row)"></i></p>'
+                        cellTemplate: '<p style="text-align: center">' +
+                        '<i class="fa fa-pencil inline-icons" ng-click="grid.appScope.editRow(row)"></i>' +
+                        '<i class="fa fa-ban inline-icons" ng-click="grid.appScope.deleteRow(row)"></i>' +
+                        '</p>'
                     }
                 ],
                 saveRow: $scope.saveRow,
@@ -85,7 +86,8 @@ myApp.controller('userController', ['$scope', '$location', '$q', 'userFact', 'mo
             saveRow: function (rowEntity) {
                 var promise = userFact.updateUser(rowEntity);
                 $scope.gridApi.rowEdit.setSavePromise(rowEntity, promise);
-                modalFact.confirmModal("userController");
+                //modalFact.confirmModal("userController");
+                snackbar.create("User data saved.");
                 return promise;
             },
             /*Delete the user row*/

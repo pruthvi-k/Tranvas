@@ -6,13 +6,27 @@ myApp.config(['$routeProvider', '$locationProvider', function ($routeProvider, $
 
     $routeProvider.when('/user', {
         templateUrl: baseUrl + 'ng_templates/users/user-list.html',
-        controller: 'userController'
+        controller: 'userController',
+        title: 'User management'
     });
 
     $routeProvider.when('/user/add', {
         templateUrl: baseUrl + 'ng_templates/users/user-add.html',
-        controller: 'userController'
+        controller: 'userController',
+        title: 'Add new user'
     });
 
     $routeProvider.otherwise('/');
 }]);
+
+myApp.run(["$rootScope", "$location",
+    function ($rootScope, $location) {
+        $rootScope.$on("$routeChangeStart",
+            function (event, next, current) {
+                if (next.$$route.title) {
+                    /*Setting the window title*/
+                    document.title = next.$$route.title;
+                }
+            });
+    }
+]);
